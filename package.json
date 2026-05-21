@@ -1,0 +1,55 @@
+{
+  "name": "bounty-doctor",
+  "version": "0.1.0",
+  "description": "Diagnose GitHub bounty issues before you waste hours: detects honeypot scam repos, AI-bot attempt swarms, and stale contests.",
+  "keywords": [
+    "algora",
+    "bounty",
+    "github",
+    "scam-detection",
+    "anti-bot",
+    "open-source",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "cnguyen14",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnguyen14/bounty-doctor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cnguyen14/bounty-doctor/issues"
+  },
+  "homepage": "https://github.com/cnguyen14/bounty-doctor#readme",
+  "funding": "https://github.com/sponsors/cnguyen14",
+  "type": "module",
+  "bin": {
+    "bounty-doctor": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts src/index.ts --format esm --dts --clean --target node18",
+    "dev": "tsx src/cli.ts",
+    "test": "node --test --import tsx test/*.test.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsup": "^8.2.4",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
+  }
+}
