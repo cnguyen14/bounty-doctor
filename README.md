@@ -1,13 +1,35 @@
-# bounty-doctor
+<p align="center">
+  <img src=".github/assets/hero.svg" alt="bounty-doctor — diagnose a GitHub bounty issue before you waste hours on it" width="100%"/>
+</p>
 
-> Diagnose a GitHub bounty issue **before** you waste hours on it.
-> Detects honeypot scam repos, AI-bot attempt swarms, and stale contests.
+<p align="center">
+  <a href="https://www.npmjs.com/package/bounty-doctor"><img src="https://img.shields.io/npm/v/bounty-doctor?color=%237ee787&label=npm&style=flat-square" alt="npm version"/></a>
+  <a href="https://github.com/cnguyen14/bounty-doctor/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/bounty-doctor?color=%2379c0ff&style=flat-square" alt="MIT License"/></a>
+  <a href="https://github.com/cnguyen14/bounty-doctor/stargazers"><img src="https://img.shields.io/github/stars/cnguyen14/bounty-doctor?color=%23dbab0a&style=flat-square" alt="GitHub stars"/></a>
+  <img src="https://img.shields.io/node/v/bounty-doctor?color=%238b949e&style=flat-square" alt="Node 18+"/>
+  <a href="https://github.com/sponsors/cnguyen14"><img src="https://img.shields.io/badge/sponsor-%E2%9D%A4-da3633?style=flat-square" alt="Sponsor"/></a>
+</p>
 
-```
+<p align="center">
+  <b>Diagnose a GitHub bounty issue <i>before</i> you waste hours on it.</b><br/>
+  Detects honeypot scam repos, AI-bot attempt swarms, and stale contests.
+</p>
+
+```sh
 npx bounty-doctor https://github.com/<owner>/<repo>/issues/<n>
 ```
 
 The 2026 Algora bounty market is hostile to first-time contributors. Devin AI auto-posts PRs. CashClaw advertises itself as an autonomous agent. Repos like `orchestration-agent/AgentOrchestration` flood GitHub with $2k–$9k "good first issue" labels that **will never pay out**. This tool tells you, in 5 seconds, whether an issue is worth your evening.
+
+## Verdicts at a glance
+
+| Verdict | When you'll see it | What to do |
+|---|---|---|
+| ![SCAM](https://img.shields.io/badge/SCAM-da3633?style=flat-square) | Honeypot patterns detected (bulk fake bounties, "good first issue" + $1k+, archived repo). | Walk away. The bounty will never pay out. |
+| ![AVOID](https://img.shields.io/badge/AVOID-fb7b33?style=flat-square) | Bot swarm or lottery-level competition; win probability under 20%. | Don't spend time. Pick something else. |
+| ![PASS](https://img.shields.io/badge/PASS-dbab0a?style=flat-square) | Possible, but odds are unfavorable. | Only attempt if you'd do the work for free anyway. |
+| ![GRIND](https://img.shields.io/badge/GRIND-2f81f7?style=flat-square) | Tractable but contested; quality wins over speed. | Write a clean PR with a demo video. Engage the maintainer. |
+| ![RACE](https://img.shields.io/badge/RACE-238636?style=flat-square) | Fresh bounty, low competition, real maintainer. | Move fast. Ship a clean first PR ASAP. |
 
 ## What it checks
 

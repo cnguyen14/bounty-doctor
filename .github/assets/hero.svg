@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-label="bounty-doctor: diagnose GitHub bounty issues before you waste hours on them">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7ee787"/>
+      <stop offset="100%" stop-color="#79c0ff"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="360" fill="url(#bg)"/>
+
+  <!-- Grid hint lines -->
+  <g stroke="#21262d" stroke-width="1" opacity="0.5">
+    <line x1="0"   y1="80"  x2="1200" y2="80"/>
+    <line x1="0"   y1="280" x2="1200" y2="280"/>
+  </g>
+
+  <!-- Terminal prompt symbol -->
+  <g transform="translate(80,165)">
+    <text font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, monospace" font-size="56" font-weight="700" fill="#7ee787">$</text>
+  </g>
+
+  <!-- Project name -->
+  <text x="140" y="180" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, monospace" font-size="64" font-weight="800" fill="url(#brand)">bounty-doctor</text>
+
+  <!-- Underline cursor -->
+  <rect x="650" y="142" width="18" height="48" fill="#7ee787">
+    <animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Tagline -->
+  <text x="140" y="225" font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="#8b949e">
+    diagnose a GitHub bounty issue before you waste hours on it
+  </text>
+
+  <!-- Verdict pills -->
+  <g transform="translate(80,300)" font-family="ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, monospace" font-weight="700" font-size="14">
+    <g transform="translate(0,0)">
+      <rect width="92" height="32" rx="6" fill="#da3633"/>
+      <text x="46" y="21" text-anchor="middle" fill="#fff">SCAM</text>
+    </g>
+    <g transform="translate(108,0)">
+      <rect width="92" height="32" rx="6" fill="#fb7b33"/>
+      <text x="46" y="21" text-anchor="middle" fill="#0d1117">AVOID</text>
+    </g>
+    <g transform="translate(216,0)">
+      <rect width="92" height="32" rx="6" fill="#dbab0a"/>
+      <text x="46" y="21" text-anchor="middle" fill="#0d1117">PASS</text>
+    </g>
+    <g transform="translate(324,0)">
+      <rect width="92" height="32" rx="6" fill="#2f81f7"/>
+      <text x="46" y="21" text-anchor="middle" fill="#fff">GRIND</text>
+    </g>
+    <g transform="translate(432,0)">
+      <rect width="92" height="32" rx="6" fill="#238636"/>
+      <text x="46" y="21" text-anchor="middle" fill="#fff">RACE</text>
+    </g>
+  </g>
+
+  <!-- Decorative right-side bar chart -->
+  <g transform="translate(880,80)" opacity="0.85">
+    <text x="0" y="20" font-family="ui-monospace, monospace" font-size="13" fill="#8b949e">scam score : 100/100</text>
+    <rect x="0" y="32" width="240" height="14" rx="3" fill="#21262d"/>
+    <rect x="0" y="32" width="240" height="14" rx="3" fill="#da3633"/>
+
+    <text x="0" y="74" font-family="ui-monospace, monospace" font-size="13" fill="#8b949e">slop score : 39/100</text>
+    <rect x="0" y="86" width="240" height="14" rx="3" fill="#21262d"/>
+    <rect x="0" y="86" width="93"  height="14" rx="3" fill="#dbab0a"/>
+
+    <text x="0" y="128" font-family="ui-monospace, monospace" font-size="13" fill="#8b949e">win prob.  : 65/100</text>
+    <rect x="0" y="140" width="240" height="14" rx="3" fill="#21262d"/>
+    <rect x="0" y="140" width="156" height="14" rx="3" fill="#238636"/>
+  </g>
+</svg>
