@@ -1,6 +1,6 @@
 {
   "name": "bounty-doctor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Diagnose GitHub bounty issues before you waste hours: detects honeypot scam repos, AI-bot attempt swarms, and stale contests.",
   "keywords": [
     "algora",
@@ -24,7 +24,7 @@
   "funding": "https://github.com/sponsors/cnguyen14",
   "type": "module",
   "bin": {
-    "bounty-doctor": "./dist/cli.js"
+    "bounty-doctor": "dist/cli.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

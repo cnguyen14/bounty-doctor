@@ -41,17 +41,15 @@ It then prints a **verdict**: `SCAM`, `AVOID`, `PASS`, `GRIND`, or `RACE`.
 
 ## Examples
 
-A real honeypot:
+A real honeypot (synthetic-token bounty farm):
 
 ```
-$ bounty-doctor https://github.com/orchestration-agent/AgentOrchestration/issues/1050
+$ bounty-doctor https://github.com/Scottcjn/rustchain-bounties/issues/12419
 
 Honeypot check
-  scam score : 100/100 ████████████████████  (scam)
-             • "good first issue" labeled with $4000 bounty — real GFI bounties are typically $5–$50
-             • Title prefix "[ Bounty $Xk ] [ Section ] ..." is a bulk-fake-bounty signature
-             • 40 sibling issues use the same "[ Bounty $Xk ] [ ... ]" title pattern
-             • Repo offers $206,000 across 40 open bounties — implausibly large for one repo
+  scam score : 75/100 ███████████████░░░░░  (scam)
+             • Title shape "[Bounty Claim|Submit|...]" in a 3897-open-issue "bounty"-named repo — classic synthetic-token farm
+             • Repo named "Scottcjn/rustchain-bounties" has 3897 open issues — bounty-board scale signals token-airdrop farm, not real payouts
 
 Verdict
     SCAM   Honeypot or fake-bounty farm. Walk away.

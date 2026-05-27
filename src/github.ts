@@ -86,12 +86,25 @@ export async function listRepoBountyIssues(
   repo: string,
   limit = 40
 ): Promise<Issue[]> {
-  const q = encodeURIComponent(
+  type SearchResp = { items: Issue[] };
+  const tryQuery = async (q: string): Promise<Issue[]> => {
+    const data = await gh<SearchResp>(
+      `/search/issues?q=${encodeURIComponent(q)}&per_page=${limit}`
+    );
+    return data.items;
+  };
+
+  const algora = await tryQuery(
     `repo:${owner}/${repo} label:"💎 Bounty" state:open`
   );
-  type SearchResp = { items: Issue[] };
-  const data = await gh<SearchResp>(`/search/issues?q=${q}&per_page=${limit}`);
-  return data.items;
+  if (algora.length > 0) return algora;
+
+  const generic = await tryQuery(
+    `repo:${owner}/${repo} bounty in:title state:open`
+  );
+  if (generic.length > 0) return generic;
+
+  return tryQuery(`repo:${owner}/${repo} state:open`);
 }
 
 export interface ParsedUrl {

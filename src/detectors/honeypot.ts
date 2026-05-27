@@ -18,6 +18,22 @@ function parseBountyLabel(label: string): number | null {
 
 const SCAM_TITLE_PATTERN = /^\[\s*Bounty\s+\$\d+k?\s*\]\s*\[/i;
 
+const BOUNTY_OPS_TITLE_PATTERN =
+  /^\[\s*Bounty(?:\s+(?:Claim|Submit|Submission|Verify|Review))?\s*[\]:]/i;
+
+const REPO_BOUNTY_FARM_NAME = /(?:^|[\/_-])(bount(?:y|ies)|airdrop)(?:$|[_-])/i;
+
+function normalizeTitleTemplate(title: string): string {
+  return title
+    .replace(/#?\d+/g, "#")
+    .replace(/0x[a-fA-F0-9]{6,}/g, "0x")
+    .replace(/["'`][^"'`]*["'`]/g, '""')
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 60)
+    .toLowerCase();
+}
+
 export function checkHoneypot(opts: {
   repo?: Repo;
   issue?: Issue;
@@ -62,6 +78,28 @@ export function checkHoneypot(opts: {
       );
       scamScore += 25;
     }
+
+    if (BOUNTY_OPS_TITLE_PATTERN.test(issue.title) && repo) {
+      const repoLooksLikeFarm =
+        REPO_BOUNTY_FARM_NAME.test(repo.full_name) &&
+        repo.open_issues_count >= 500;
+      if (repoLooksLikeFarm) {
+        signals.push(
+          `Title shape "[Bounty Claim|Submit|...]" in a ${repo.open_issues_count}-open-issue "bounty"-named repo — classic synthetic-token farm`
+        );
+        scamScore += 45;
+      }
+    }
+  }
+
+  if (repo) {
+    const farmName = REPO_BOUNTY_FARM_NAME.test(repo.full_name);
+    if (farmName && repo.open_issues_count >= 1000) {
+      signals.push(
+        `Repo named "${repo.full_name}" has ${repo.open_issues_count} open issues — bounty-board scale signals token-airdrop farm, not real payouts`
+      );
+      scamScore += 30;
+    }
   }
 
   if (repoBountyIssues && repoBountyIssues.length > 0) {
@@ -71,6 +109,33 @@ export function checkHoneypot(opts: {
     if (titlePrefixMatches >= 5) {
       signals.push(
         `${titlePrefixMatches} sibling issues use the same "[ Bounty $Xk ] [ ... ]" title pattern — bulk-faked listings`
+      );
+      scamScore += 35;
+    }
+
+    const templateCounts = new Map<string, number>();
+    for (const i of repoBountyIssues) {
+      const norm = normalizeTitleTemplate(i.title);
+      if (norm.length < 10) continue;
+      templateCounts.set(norm, (templateCounts.get(norm) ?? 0) + 1);
+    }
+    let topTemplate = "";
+    let topTemplateCount = 0;
+    for (const [t, c] of templateCounts) {
+      if (c > topTemplateCount) {
+        topTemplate = t;
+        topTemplateCount = c;
+      }
+    }
+    if (
+      topTemplateCount >= 20 &&
+      topTemplateCount / repoBountyIssues.length >= 0.4
+    ) {
+      signals.push(
+        `${topTemplateCount} sibling issues share the same auto-generated title template ("${topTemplate.slice(
+          0,
+          50
+        )}…") — bot-generated bulk listings`
       );
       scamScore += 35;
     }
